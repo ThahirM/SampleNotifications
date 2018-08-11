@@ -20,12 +20,11 @@ class NotificationManager {
     }
     
     private (set) var notificationManagerDelegate: NotificationManagerDelegate?
-    var stepsManager: NotificationManager?
     
     func register(completionHandler: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         // request for permission and if yes register for push notification
         let requestAuthorization = { (completion: @escaping (() -> Void)) in
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (success, error) in
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
                 
                 // handle error cases
                 guard error == nil else {
@@ -38,9 +37,6 @@ class NotificationManager {
                     completionHandler?(false, nil)
                     return
                 }
-                
-                // register for remote notifications
-                UIApplication.shared.registerForRemoteNotifications()
                 
                 // fire completion handler
                 completion()
