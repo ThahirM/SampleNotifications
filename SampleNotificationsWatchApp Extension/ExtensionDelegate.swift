@@ -13,13 +13,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
-        
-//        let center = UNUserNotificationCenter.current()
-//        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-//            // Enable or disable features based on authorization
-//        }
-//        center.delegate = NotificationDelegate()
-        
         NotificationManager.shared.register()
     }
 
